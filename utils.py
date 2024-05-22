@@ -31,7 +31,7 @@ class Stat:
 		self.duration = duration
 	
 	def __str__(self):
-		return f"{self.name}: {self.distance} km, {self.duration} h"
+		return f"{self.name}: {self.distance} km, {self.duration} h - converted {self.convert()} km"
 	
 	def append(self, distance: int, duration: int):
 		self.distance += distance
