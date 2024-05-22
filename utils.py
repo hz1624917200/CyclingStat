@@ -9,11 +9,11 @@ INDOOR_RIDING_RATE = 32
 CROSS_DIS_LIMIT = 100
 DUMP_RECORD = False
 DUMP_CSV = True
-UPDATE_DB = True
+UPDATE_DB = False
 
 # remove(WORKDIR + "/log.txt")
 # logging.basicConfig(filename=WORKDIR + "/log.txt", level=logging.DEBUG, encoding="utf-8")
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 class Command(Enum):
 	MAIN = 0

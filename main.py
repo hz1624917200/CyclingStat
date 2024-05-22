@@ -4,6 +4,7 @@ from utils import WORKDIR, GROUP_NAME, DUMP_RECORD, UPDATE_DB
 import json
 import os
 
+START_DATE = "5.21"
 
 if __name__ == "__main__":
 	if not UPDATE_DB:
@@ -15,7 +16,7 @@ if __name__ == "__main__":
 		except FileNotFoundError:
 			pass
 		msg_list, wxid2remark = dump_history(GROUP_NAME, update_db=True)
-	msg_record = process_data(msg_list, wxid2remark, start_date="5.21")
+	msg_record = process_data(msg_list, wxid2remark, start_date=START_DATE)
 
 	# dump message record
 	if DUMP_RECORD:
@@ -25,6 +26,7 @@ if __name__ == "__main__":
 	# statistics
 	stats = statistic(msg_record)
 	sorted_stats = sorted(stats.values(), reverse=True)
+	print("----------------------------\nStatistics:")
 	for stat in sorted_stats:
 		print(stat)
 	pass

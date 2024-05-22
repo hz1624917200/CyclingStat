@@ -153,11 +153,11 @@ def parse_message(msg: str) -> tuple[int , float]:
 def parse_data(msg_record: dict[str, dict[str, str]]) -> dict[str, dict[str, tuple[int, float]]]:
 	statistics = {}
 	for date, record in msg_record.items():
-		logging.debug(f"------------------------\ndate: {date}")
+		logging.info(f"------------------------\ndate: {date}")
 		statistics[date] = {}
 		for remark, msg in record.items():
 			distance, duration = parse_message(msg)
-			logging.debug(f"{remark}: {msg} - {distance} km, {duration} h")
+			logging.info(f"{remark}: {msg} - {distance} km, {duration} h")
 			statistics[date][remark] = (distance, duration)
 	return statistics
 
