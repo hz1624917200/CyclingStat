@@ -11,8 +11,9 @@ DUMP_RECORD = False
 DUMP_CSV = True
 UPDATE_DB = True
 
-remove(WORKDIR + "/log.txt")
-logging.basicConfig(filename=WORKDIR + "/log.txt", level=logging.DEBUG, encoding="utf-8")
+# remove(WORKDIR + "/log.txt")
+# logging.basicConfig(filename=WORKDIR + "/log.txt", level=logging.DEBUG, encoding="utf-8")
+logging.basicConfig(level=logging.DEBUG)
 
 class Command(Enum):
 	MAIN = 0

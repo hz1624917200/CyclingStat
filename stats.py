@@ -29,7 +29,7 @@ def msg_filter(msg_list: list[dict[str, str]]) -> dict[str, int]:
 
 # process the data
 # @return: message record: {date: {remark: note}}
-def process_data(msg_list: list[dict[str, str]], wxid2remark: dict[str, str]) -> dict[str, dict[str, str]]:
+def process_data(msg_list: list[dict[str, str]], wxid2remark: dict[str, str], start_date: str = "") -> dict[str, dict[str, str]]:
 	msg_list = msg_filter(msg_list)
 	group_notes: dict[str, list[str]] = {}
 	record: dict[str, dict[str, str]] = {}
@@ -40,6 +40,8 @@ def process_data(msg_list: list[dict[str, str]], wxid2remark: dict[str, str]) ->
 		# date is in line 2
 		last_note: list[str] = []
 		date = content[1]
+		if start_date != "" and float(date) < float(start_date):
+			continue
 		if date in group_notes:
 			last_note = group_notes[date]	
 		start = 2
@@ -51,7 +53,13 @@ def process_data(msg_list: list[dict[str, str]], wxid2remark: dict[str, str]) ->
 			# append a line in the notes
 			if date not in record:
 				record[date] = {}
-			record[date][wxid2remark[msg["talker"]]] = content[-1]
+			try:
+				record[date][wxid2remark[msg["talker"]]] = content[-1]
+			except KeyError:
+				if msg["talker"] == "未知":
+					logging.warning(f"Unkown sender:\n {msg['content']['msg']}\n")
+					name = content[-1].split(" ")[1]
+					record[date][name] = content[-1]
 		elif len(last_note) == len(content):
 			# edit one line
 			for i in range(len(content)):

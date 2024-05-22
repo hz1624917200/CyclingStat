@@ -6,13 +6,16 @@ import os
 
 
 if __name__ == "__main__":
-	if UPDATE_DB:
+	if not UPDATE_DB:
 		msg_list, wxid2remark = dump_history(GROUP_NAME, update_db=False)
 	else:
 		# remove old db
-		os.remove(WORKDIR + "/decrypted/merge_all.db")
+		try:
+			os.remove(WORKDIR + "/decrypted/merge_all.db")
+		except FileNotFoundError:
+			pass
 		msg_list, wxid2remark = dump_history(GROUP_NAME, update_db=True)
-	msg_record = process_data(msg_list, wxid2remark)
+	msg_record = process_data(msg_list, wxid2remark, start_date="5.21")
 
 	# dump message record
 	if DUMP_RECORD:
