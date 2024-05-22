@@ -21,10 +21,8 @@ def msg_filter(msg_list: list[dict[str, str]]) -> dict[str, int]:
 		if command == Command.MAIN:
 			msg_list_filtered.append(msg)
 		elif command == Command.SPLIT:
-			# if msg["is_sender"] == 1:
-				# break
-			# current cycle is over TODO: change back to break
-			continue
+			if msg["is_sender"] == 1:
+				break
 
 	return msg_list_filtered[::-1]
 
