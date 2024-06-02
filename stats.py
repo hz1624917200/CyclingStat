@@ -40,6 +40,11 @@ def process_data(msg_list: list[dict[str, str]], wxid2remark: dict[str, str], st
 		# date is in line 2
 		last_note: list[str] = []
 		date = content[1]
+		try:
+			float(date)
+		except ValueError:
+			logging.info(f"Not a record: {msg['content']['msg']}")
+			continue
 		if start_date != "" and float(date) < float(start_date):
 			continue
 		if date in group_notes:

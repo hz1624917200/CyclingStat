@@ -7,9 +7,9 @@ WORKDIR = "./workdir"
 GROUP_NAME = "北大车队23-24秋季正式队员群"
 INDOOR_RIDING_RATE = 32
 CROSS_DIS_LIMIT = 100
-DUMP_RECORD = False
+DUMP_RECORD = True
 DUMP_CSV = True
-UPDATE_DB = False
+UPDATE_DB = True
 
 # remove(WORKDIR + "/log.txt")
 # logging.basicConfig(filename=WORKDIR + "/log.txt", level=logging.DEBUG, encoding="utf-8")
